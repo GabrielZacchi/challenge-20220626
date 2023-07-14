@@ -5,7 +5,6 @@ from scrapy.loader import ItemLoader
 from itemloaders.processors import TakeFirst
 
 from scraper.scraper.items import ProductItem
-
 class ProductsSpider(CrawlSpider):
     name = "products"
     #allowed_domains = ["openfoodfacts.org"]
@@ -13,11 +12,15 @@ class ProductsSpider(CrawlSpider):
         "https://world.openfoodfacts.org/"
     ]
 
+    scraped_count = 0
+    limit = 2
+
     rules = (
         Rule(
             LinkExtractor(allow=("product")),
             callback="parse_product",
             follow=True,
+            process_request="process_request"
         ),
     )
 
@@ -78,3 +81,9 @@ class ProductsSpider(CrawlSpider):
         )
 
         yield product_loader.load_item()
+    
+    def process_request(self, item, request):
+        if self.scraped_count <= self.limit:
+            if request.status == 200:
+                self.scraped_count += 1
+            return item
