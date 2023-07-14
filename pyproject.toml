@@ -13,6 +13,10 @@ pymongo = "^4.4.1"
 mongoengine = "^0.27.0"
 scrapy-djangoitem = "^1.1.1"
 django-environ = "^0.10.0"
+django-rest-framework-mongoengine = "^3.4.1"
+djangorestframework = "^3.14.0"
+scrapy = "^2.9.0"
+scrapy-mongoengine-item = "^0.1.5"
 
 
 [build-system]

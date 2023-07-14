@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'scraper',
     'fitness_foods_lc'
 ]
 
@@ -82,7 +84,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-mongoengine.connect(db=DATABASE_NAME, host=DATABASE_HOST, username=USERNAME, password=PASSWORD)
+mongoengine.connect(
+    db=env('DB_NAME'), 
+    host=f"mongodb+srv://{env('DB_USERNAME')}:{env('DB_PASSWORD')}@cluster0.up8x86d.mongodb.net/?retryWrites=true&w=majority", 
+    username=env('DB_USERNAME'), 
+    password=env('DB_PASSWORD')
+)
 
 
 # Password validation
@@ -109,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
