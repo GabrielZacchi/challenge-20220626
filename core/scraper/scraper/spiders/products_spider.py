@@ -29,7 +29,7 @@ class ProductsSpider(CrawlSpider):
 
         product_code = url.split('/')[-2]
 
-        product_barcode = str(response.xpath('//*[@id="barcode_paragraph"]/text()[1]').get()).strip()
+        product_barcode = str(response.css('#barcode::text').get()).strip()
 
         type_product_barcode = str(response.xpath('//*[@id="barcode_paragraph"]/text()[2]').get()).strip()
 
@@ -71,6 +71,10 @@ class ProductsSpider(CrawlSpider):
 
         product_loader.add_value(
             "brands", brands
+        )
+
+        product_loader.add_css(
+            "image_url", "#og_image::attr(src)"
         )
 
         yield product_loader.load_item()
