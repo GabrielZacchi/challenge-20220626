@@ -29,22 +29,48 @@ class ProductsSpider(CrawlSpider):
 
         product_code = url.split('/')[-2]
 
-        product_barcode = str(product_loader.get_css('#barcode::text')[0]) + str(product_loader.get_xpath('//*[@id="barcode_paragraph"]/text()[2]')[0]).strip()
+        product_barcode = str(response.xpath('//*[@id="barcode_paragraph"]/text()[1]').get()).strip()
+
+        type_product_barcode = str(response.xpath('//*[@id="barcode_paragraph"]/text()[2]').get()).strip()
+
+        product_name = str(response.css('#product > div > div > div.card-section > div > div.medium-8.small-12.columns > h2::text').get()).strip()
+
+        categories = str(response.xpath('string(//*[@id="field_categories_value"])').get()).strip()
+
+        packaging = str(response.xpath('string(//*[@id="field_packaging_value"])').get()).strip()
+
+        brands = str(response.xpath('string(//*[@id="field_brands_value"])').get()).strip()
 
         product_loader.add_value(
             "code", product_code
         )
 
         product_loader.add_value(
-            "barcode", product_barcode
+            "barcode", str(product_barcode + type_product_barcode)
         )
 
         product_loader.add_value(
             "url", url
         )
 
+        product_loader.add_value(
+            "product_name", product_name
+        )
+
         product_loader.add_css(
-            "product_name", "#product > div > div > div.card-section > div > div.medium-8.small-12.columns > h2::text"
+            "quantity", "#field_quantity_value::text"
+        )
+
+        product_loader.add_value(
+            "categories", categories
+        )
+
+        product_loader.add_value(
+            "packaging", packaging
+        )
+
+        product_loader.add_value(
+            "brands", brands
         )
 
         yield product_loader.load_item()
