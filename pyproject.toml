@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "challenge-20220626"
+version = "0.1.0"
+description = ""
+authors = ["gabriel.stoffel <gabriel.stoffel@gmail.com>"]
+readme = "README.md"
+packages = [{include = "challenge_20220626"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+django = "^4.2.3"
+pymongo = "^4.4.1"
+mongoengine = "^0.27.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
