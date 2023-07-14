@@ -18,6 +18,9 @@ djangorestframework = "^3.14.0"
 scrapy = "^2.9.0"
 scrapy-mongoengine-item = "^0.1.5"
 django-crontab = "^0.7.1"
+apscheduler = "^3.10.1"
+psutil = "^5.9.5"
+schedule = "^1.2.0"
 
 
 [build-system]
