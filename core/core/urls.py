@@ -17,8 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from fitness_foods_lc import urls
+from .views import index_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(urls.router.urls))
+    path('', index_view),
+    path('', include(urls.router.urls))
 ]
