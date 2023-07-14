@@ -20,6 +20,14 @@ class Products(Document):
     def save(self, *args, **kwargs):
         if not self.imported_t:
             self.imported_t = datetime.datetime.now()
+        
         if self.status == 'draft':
             self.status = 'imported'
+        
+        # Check if the document already exists in the database
+        if self.code:
+            existing_product = Products.objects(code=self.code).first()
+            if existing_product:
+                return existing_product.update(**self.to_mongo())
+        
         return super(Products, self).save(*args, **kwargs)
