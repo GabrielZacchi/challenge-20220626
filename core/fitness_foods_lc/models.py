@@ -5,7 +5,7 @@ class Status(str, Enum):
     DRAFT = 'draft'
     IMPORTED = 'imported'
 class Products(Document):
-    code = fields.IntField(min_value=0)
+    code = fields.IntField(min_value=0, unique=True)
     barcode = fields.StringField()
     status = fields.EnumField(Status, default='draft')
     imported_t = fields.DateTimeField()
