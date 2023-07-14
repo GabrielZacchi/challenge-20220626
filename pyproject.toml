@@ -11,6 +11,8 @@ python = "^3.8"
 django = "^4.2.3"
 pymongo = "^4.4.1"
 mongoengine = "^0.27.0"
+scrapy-djangoitem = "^1.1.1"
+django-environ = "^0.10.0"
 
 
 [build-system]
