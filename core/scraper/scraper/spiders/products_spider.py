@@ -3,17 +3,18 @@ from scrapy.spiders import Rule
 from scrapy.linkextractors import LinkExtractor
 from scrapy.loader import ItemLoader
 from itemloaders.processors import TakeFirst
-
 from scraper.scraper.items import ProductItem
+from environment.environment import env
+
 class ProductsSpider(CrawlSpider):
     name = "products"
-    #allowed_domains = ["openfoodfacts.org"]
+    allowed_domains = ["openfoodfacts.org"]
     start_urls = [
         "https://world.openfoodfacts.org/"
     ]
 
     scraped_count = 0
-    limit = 2
+    limit = int(env('PRODUCTS_LIMIT'))
 
     rules = (
         Rule(
