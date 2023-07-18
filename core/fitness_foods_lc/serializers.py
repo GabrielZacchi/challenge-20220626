@@ -1,4 +1,4 @@
-from rest_framework_mongoengine import serializers, fields
+from rest_framework_mongoengine import serializers
 from fitness_foods_lc import models
 
 class ProductsSerializers(serializers.DocumentSerializer):

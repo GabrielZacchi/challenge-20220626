@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import mongoengine
 from environment.environment import env
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'scraper',
+    'coreapi',
+    'drf_yasg',
     'fitness_foods_lc'
 ]
 
@@ -77,8 +80,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-mongoengine.connect(
-    db=env('DB_NAME'), 
+if 'test' in sys.argv:
+    db_name = f"test_{env('DB_NAME')}"
+else:
+    db_name = env('DB_NAME')
+
+mongoengine.register_connection(
+    alias='default',
+    db=db_name, 
     host=f"mongodb+srv://{env('DB_USERNAME')}:{env('DB_PASSWORD')}@cluster0.up8x86d.mongodb.net/?retryWrites=true&w=majority", 
     username=env('DB_USERNAME'), 
     password=env('DB_PASSWORD')
@@ -105,6 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 50
 }
