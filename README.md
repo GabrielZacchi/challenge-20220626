@@ -24,8 +24,8 @@ To run the project, follow these steps:
 1. Clone the GitHub repository:
 
 ```bash
-git clone https://github.com/your-username/fitness-foods-lc.git
-cd fitness-foods-lc
+git clone https://github.com/GabrielZacchi/challenge-20220626.git
+cd challenge-20220626
 ```
 
 2. Set up the virtual environment and install dependencies:
