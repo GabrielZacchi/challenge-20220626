@@ -34,7 +34,7 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('', index_view),
+    path('', index_view, name='Fullstack Challenge 20201026'),
     path('', include(urls.router.urls)),
     path('docs/', include_docs_urls(title='Fitness Foods LC - Open Food Facts API')),
     path('swagger<str:format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
